@@ -24,47 +24,20 @@ security:
         oauth_token:
             pattern:    ^/oauth/v2/token
             security:   false
-        secured_area:
-            pattern:    ^/
-            anonymous: ~
-            form_login:
-                login_path:                     /login
-
-                use_forward:                    false
-
-                check_path:                     /login_check
-
-                post_only:                      true
-
-                always_use_default_target_path: true
-                default_target_path:            /
-                target_path_parameter:          redirect_url
-                use_referer:                    true
-
-                failure_path:                   null
-                failure_forward:                false
-
-                username_parameter:             _username
-                password_parameter:             _password
-
-                csrf_parameter:                 _csrf_token
-                intention:                      authenticate
-
-            logout:
-                path:   /logout
-                target: /
+        
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
 
         oauth_authorize:
             pattern:    ^/oauth/v2/auth
             form_login:
                 provider: user_provider
-                check_path: _security_check
-                login_path: _demo_login
+                check_path: /oauth/v2/auth_login_check
+                login_path: /oauth/v2/auth_login
             anonymous: true
-        api:
-            pattern:    ^/api
-            fos_oauth:  true
-            stateless:  true
+
 
     access_control:
         - { path: ^/api/salt, roles: IS_AUTHENTICATED_ANONYMOUSLY }
