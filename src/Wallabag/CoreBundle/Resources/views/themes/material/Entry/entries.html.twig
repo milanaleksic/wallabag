@@ -38,8 +38,8 @@
                     <div class="card">
                         <div class="card-content">
                             <span class="card-title"><a href="{{ path('view', { 'id': entry.id }) }}">{{ entry.title|raw }}</a></span>
-                            {% if entry.content| readingTime > 0 %}
-                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.content| readingTime }} min</span></div>
+                            {% if entry.readingTime > 0 %}
+                                <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} {{ entry.readingTime }} min</span></div>
                             {% else %}
                                 <div class="estimatedTime grey-text"><span class="tool reading-time">{% trans %}estimated reading time: {% endtrans %} <small class="inferieur">&lt;</small> 1 min</span></div>
                             {% endif %}

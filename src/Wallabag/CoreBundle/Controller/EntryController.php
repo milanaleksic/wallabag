@@ -9,6 +9,7 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
+use Wallabag\CoreBundle\Helper\Tools;
 
 class EntryController extends Controller
 {
@@ -32,6 +33,7 @@ class EntryController extends Controller
 
             $entry->setTitle($content->getTitle());
             $entry->setContent($content->getBody());
+            $entry->setReadingTime(Tools::getReadingTime($content->getBody()));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($entry);
