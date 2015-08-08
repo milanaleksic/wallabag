@@ -18,7 +18,7 @@
     {% if entries is not empty %}
         <div class="results clearfix">
             <div class="nb-results left">{{ entries.count }} {% trans %}entries{% endtrans %}</div>
-            <div class="left">Filters: <select><option>< 5 min</option><option>between 5 & 10 min</option><option>> 10 min</option></select></div>
+            <div class="left"><form>{{ form_rest(form) }}<input type="submit" name="submit-filter" value="filter" /></form></div>
             <ul class="pagination right">
                 {% for p in range(1, entries.nbPages) %}
                     <li class="{{ currentPage == p ? 'active':'waves-effect'}}">

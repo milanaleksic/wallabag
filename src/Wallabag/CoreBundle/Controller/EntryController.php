@@ -9,7 +9,10 @@ use Wallabag\CoreBundle\Entity\Entry;
 use Wallabag\CoreBundle\Service\Extractor;
 use Wallabag\CoreBundle\Form\Type\NewEntryType;
 use Wallabag\CoreBundle\Form\Type\EditEntryType;
+use Wallabag\CoreBundle\Filter\EntryFilterType;
 use Wallabag\CoreBundle\Helper\Tools;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 
 class EntryController extends Controller
 {
@@ -95,11 +98,28 @@ class EntryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showUnreadAction($page)
+    public function showUnreadAction(Request $request, $page)
     {
-        $entries = $this->getDoctrine()
+        $form = $this->get('form.factory')->create(new EntryFilterType());
+
+        $filterBuilder = $this->get('doctrine.orm.entity_manager')
             ->getRepository('WallabagCoreBundle:Entry')
-            ->findUnreadByUser($this->getUser()->getId());
+            ->createQueryBuilder('e')
+            ->leftJoin('e.user', 'u')
+            ->where('e.isArchived = false')
+            ->andWhere('u.id =:userId')->setParameter('userId', $this->getUser()->getId())
+            ->orderBy('e.id', 'desc');
+
+        if ($request->query->has($form->getName())) {
+            // manually bind values from the request
+            $form->submit($request->query->get($form->getName()));
+
+            // build the query from the given form object
+            $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $filterBuilder);
+        }
+
+        $pagerAdapter = new DoctrineORMAdapter($filterBuilder->getQuery());
+        $entries = new Pagerfanta($pagerAdapter);
 
         $entries->setMaxPerPage($this->getUser()->getConfig()->getItemsPerPage());
         $entries->setCurrentPage($page);
@@ -107,6 +127,7 @@ class EntryController extends Controller
         return $this->render(
             'WallabagCoreBundle:Entry:entries.html.twig',
             array(
+                'form'          => $form->createView(),
                 'entries'       => $entries,
                 'currentPage'   => $page
             )

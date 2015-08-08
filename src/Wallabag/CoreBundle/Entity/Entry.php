@@ -96,7 +96,7 @@ class Entry
     /**
      * @var int
      *
-     * @ORM\Column(name="reading_type", type="integer", nullable=true)
+     * @ORM\Column(name="reading_time", type="integer", nullable=true)
      */
     private $readingTime;
 
