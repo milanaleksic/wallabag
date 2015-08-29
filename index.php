@@ -7,6 +7,7 @@
  * @copyright  2013
  * @license    http://opensource.org/licenses/MIT see COPYING file
  */
+ini_set('session.save_path', '/mnt/sd/wallabag/sessions');
 
 define ('POCHE', '1.9.0');
 require 'check_essentials.php';

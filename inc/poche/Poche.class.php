@@ -304,7 +304,12 @@ class Poche
                   echo 1;
                   exit;
                 }
-                else {
+                else if (isset($_GET['random']) && $this->store->getRandomId($this->user->getId())) {
+                    $id_array = $this->store->getRandomId($this->user->getId());
+                    $id = $id_array[0];
+                    Tools::redirect('?view=view&id=' . $id[0]);
+		}
+		else {
                   Tools::redirect();
                 }
                 break;

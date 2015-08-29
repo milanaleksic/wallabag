@@ -40,7 +40,7 @@ final class Tools
      */
     public static function getPocheUrl()
     {
-        $https = (!empty($_SERVER['HTTPS'])
+        $https = true || (!empty($_SERVER['HTTPS'])
                     && (strtolower($_SERVER['HTTPS']) == 'on'))
             || (isset($_SERVER["SERVER_PORT"])
                     && $_SERVER["SERVER_PORT"] == '443') // HTTPS detection.

@@ -413,7 +413,7 @@ class Database {
     }
     public function getRandomId($user_id) {
         $random = (STORAGE == 'mysql') ? 'RAND()' : 'RANDOM()';
-        $sql = "SELECT id FROM entries WHERE user_id=? ORDER BY ". $random . " LIMIT 1";
+        $sql = "SELECT id FROM entries WHERE user_id=? and is_read=false ORDER BY ". $random . " LIMIT 1";
         $params = array($user_id);
         $query = $this->executeQuery($sql, $params);
         $id = $query->fetchAll();

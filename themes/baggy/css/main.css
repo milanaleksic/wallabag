@@ -973,7 +973,7 @@ pre code {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 690px) {
   .entrie {
     width: 100%;
     margin-left: 0;
@@ -1080,4 +1080,16 @@ pre code {
   #search-form form {
     width: 100%;
   }
+}
+
+/* MILAN ALEKSIC */
+
+#article_toolbar a.archive-off,
+.entrie .tools a .archive-off {
+    background-color: #999;
+}
+
+
+.list-entries .entrie.read {
+    background-color: #ddd;
 }
