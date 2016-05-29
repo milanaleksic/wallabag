@@ -190,7 +190,8 @@ class Poche
         {
             case 'add':
                 $content = Tools::getPageContent($url);
-                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
+                //MILAN $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : _('Untitled');
+                $title = ($content['rss']['channel']['item']['title'] != '') ? $content['rss']['channel']['item']['title'] : $url;
                 $body = $content['rss']['channel']['item']['description'];
 
                 // clean content from prevent xss attack
