@@ -11,7 +11,7 @@
                 <li><a href="{{ entry.url|e }}" target="_blank" title="{% trans "original" %} : {{ entry.title|e }}" class="tool link icon icon-link"> {{ entry.url | e | getDomain }}</a></li>
                 <li><a title="{% trans "Mark as read" %}" class="tool icon icon-check {% if entry.is_read == 0 %}archive-off{% else %}archive{% endif %}" href="javascript: void(null);" id="markAsRead"> {% if entry.is_read == 0 %}mark read{% else %}mark unread{% endif %}</a></li>
                 <li><a title="{% trans "Favorite" %}" class="tool icon icon-star {% if entry.is_fav == 0 %}fav-off{% else %}fav{% endif %}" href="javascript: void(null);" id="setFav"> {% if entry.is_fav == 0 %}mark fav{% else %}unmark fav{% endif %}</a></li>
-                <li><a title="{% trans "Delete" %}" class="tool delete icon icon-trash" href="./?action=delete&amp;id={{ entry.id|e }}"> {% trans "Delete" %}</a></li>
+                <li><a title="{% trans "Delete" %}" class="tool delete icon icon-trash" href="./?action=delete&amp;id={{ entry.id|e }}"> Delete</a></li>
                 {% if constant('SHARE_TWITTER') == 1 %}<li><a href="https://twitter.com/home?status={{entry.title|url_encode}}%20{{ entry.url|url_encode }}%20via%20@wallabagapp" target="_blank" class="tool twitter icon icon-twitter" title="{% trans "Tweet" %}"> {% trans "Tweet" %}</a></li>{% endif %}
                 {% if constant('SHARE_MAIL') == 1 %}<li><a href="mailto:?subject={{ entry.title }}&amp;body={{ content|striptags|slice(0, 700) }}%2E%2E%2E%0A%0A{% trans "Read the rest at" %} {{ entry.url|url_encode }}%20via%20@wallabagapp" class="tool email icon icon-mail" title="{% trans "Email" %}"> {% trans "Email" %}</a></li>{% endif %}
                 {% if constant('SHARE_SHAARLI') == 1 %}<li><a href="{{ constant('SHAARLI_URL') }}/index.php?post={{ entry.url|url_encode }}&amp;title={{ entry.title|url_encode }}" target="_blank" class="tool shaarli" title="{% trans "shaarli" %}"> {% trans "shaarli" %}</a></li>{% endif %}
@@ -20,7 +20,7 @@
                 {% if constant('FLATTR') == 1 %}{% if flattr.status == constant('FLATTRABLE') %}<li><a href="http://flattr.com/submit/auto?url={{ entry.url }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"> {% trans "flattr" %}</a></li>{% elseif flattr.status == constant('FLATTRED') %}<li><a href="{{ flattr.flattrItemURL }}" class="tool flattr icon icon-flattr" target="_blank" title="{% trans "flattr" %}"> {% trans "flattr" %} ({{ flattr.numFlattrs }})</a></li>{% endif %}{% endif %}
                 {% if constant('CARROT') == 1 %}<li><a href="https://secure.carrot.org/GiveAndGetBack.do?url={{ entry.url|url_encode }}&title={{ entry.title|url_encode }}" class="tool carrot icon-image icon-image--carrot" target="_blank" title="{% trans "carrot" %}"> Carrot</a></li>{% endif %}
                 {% if constant('SHOW_PRINTLINK') == 1 %}<li><a title="{% trans "Print" %}" class="tool icon icon-print" href="javascript: window.print();"> {% trans "Print" %}</a></li>{% endif %}
-                {% if constant('RELOAD_ARTICLE') == 1 %}<li><a class="tool reload icon icon-reload" href="./?action=reload_article&amp;id={{ entry.id|e }}" title="{% trans "Reload article" %}"> Reload</a></li>{% endif %}
+                {% if constant('RELOAD_ARTICLE') == 1 %}<li><a class="tool reload icon icon-reload" href="./?action=reload_article&amp;id={{ entry.id|e }}" title="{% trans "Reload article" %}"> reload</a></li>{% endif %}
                 {% if constant('EPUB') == 1 %}<li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                 {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
@@ -62,6 +62,7 @@
 				        }
 				      });
 					    $("body").css("cursor", "auto");
+                        location.reload();
 					  });
 					  
 					  // toggle favorite property of current article
@@ -84,6 +85,7 @@
 				        }
 				      });
 					    $("body").css("cursor", "auto");
+                        location.reload();
 					  });
 
             $(window).scroll(function(e){
