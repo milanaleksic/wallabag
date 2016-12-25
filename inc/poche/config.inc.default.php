@@ -54,6 +54,7 @@
 @define ('FLATTRABLE', '1');
 @define ('FLATTRED', '2');
 @define ('CARROT', FALSE);
+@define ('REPORT_BAD', FALSE);
 
 // ebook
 @define ('EPUB', TRUE);

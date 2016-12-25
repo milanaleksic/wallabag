@@ -24,7 +24,7 @@
                 {% if constant('EPUB') == 1 %}<li><a href="./?epub&amp;method=id&amp;value={{ entry.id|e }}" title="Generate ePub file">EPUB</a></li>{% endif %}
                 {% if constant('MOBI') == 1 %}<li><a href="./?mobi&amp;method=id&amp;value={{ entry.id|e }}" title="Generate Mobi file">MOBI</a></li>{% endif %}
                 {% if constant('PDF') == 1 %}<li><a href="./?pdf&amp;method=id&amp;value={{ entry.id|e }}" title="Generate PDF file">PDF</a></li>{% endif %}
-                <li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>
+                {% if constant('REPORT_BAD') == 1 %}<li><a href="mailto:hello@wallabag.org?subject=Wrong%20display%20in%20wallabag&amp;body={{ entry.url|url_encode }}" title="{% trans "Does this article appear wrong?" %}" class="tool bad-display icon icon-delete"><span>{% trans "Does this article appear wrong?" %}</span></a></li>{% endif %}
             </ul>
         </div>
         <div id="article">
