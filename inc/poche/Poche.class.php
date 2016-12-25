@@ -369,7 +369,11 @@ class Poche
                 }
                 $this->messages->add('s', _('The tag has been applied successfully'));
                 Tools::logm('The tag has been applied successfully');
-                Tools::redirect();
+                if (sizeof($entry_ids) == 1) {
+                    Tools::redirect('?view=edit-tags&id=' . $entry_ids[0]);                    
+                } else {
+                    Tools::redirect();                    
+                }
                 break;
             case 'remove_tag' :
                 $tag_id = $_GET['tag_id'];
@@ -385,7 +389,7 @@ class Poche
                     Tools::logm('tag deleted');
                 }
                 $this->messages->add('s', _('The tag has been successfully deleted'));
-                Tools::redirect();
+                Tools::redirect('?view=edit-tags&id=' . $id);
                 break;
 
             case 'reload_article' :
