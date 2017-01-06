@@ -48,13 +48,16 @@
 					    $.ajax( { url: './?action=toggle_archive&id={{ entry.id|e }}' }).done(
 					    function( data ) {
 				        if ( data == '1' ) {
-				        	if ( $('#markAsRead').hasClass("archive-off") ) {
-				        		$('#markAsRead').removeClass("archive-off");	
-				        		$('#markAsRead').addClass("archive");
+						var anchor = $('#markAsRead')
+				        	if ( anchor.hasClass("archive-off") ) {
+				        		anchor.removeClass("archive-off");	
+				        		anchor.addClass("archive");
+							anchor.text(" mark unread");
 				        	}
 				        	else {
-				        		$('#markAsRead').removeClass("archive");	
-				        		$('#markAsRead').addClass("archive-off");
+				        		anchor.removeClass("archive");	
+				        		anchor.addClass("archive-off");
+							anchor.text(" mark read");
 				        	}
 				        }
 				        else {
@@ -62,7 +65,6 @@
 				        }
 				      });
 					    $("body").css("cursor", "auto");
-                        location.reload();
 					  });
 					  
 					  // toggle favorite property of current article
