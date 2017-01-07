@@ -42,53 +42,55 @@
         <script type="text/javascript">
         $(document).ready(function() {
         
-        		// toggle read property of current article
-        		$('#markAsRead').click(function(){
-        			$("body").css("cursor", "wait");
-					    $.ajax( { url: './?action=toggle_archive&id={{ entry.id|e }}' }).done(
-					    function( data ) {
-				        if ( data == '1' ) {
-						var anchor = $('#markAsRead')
-				        	if ( anchor.hasClass("archive-off") ) {
-				        		anchor.removeClass("archive-off");	
-				        		anchor.addClass("archive");
-							anchor.text(" mark unread");
-				        	}
-				        	else {
-				        		anchor.removeClass("archive");	
-				        		anchor.addClass("archive-off");
-							anchor.text(" mark read");
-				        	}
-				        }
-				        else {
-				          alert('Error! Pls check if you are logged in.');
-				        }
-				      });
-					    $("body").css("cursor", "auto");
-					  });
-					  
-					  // toggle favorite property of current article
-        		$('#setFav').click(function(){
-        			$("body").css("cursor", "wait");
-					    $.ajax( { url: './?action=toggle_fav&id={{ entry.id|e }}' }).done(
-					    function( data ) {
-				        if ( data == '1' ) {
-				        	if ( $('#setFav').hasClass("fav-off") ) {
-				        		$('#setFav').removeClass("fav-off");	
-				        		$('#setFav').addClass("fav");
-				        	}
-				        	else {
-				        		$('#setFav').removeClass("fav");	
-				        		$('#setFav').addClass("fav-off");
-				        	}
-				        }
-				        else {
-				          alert('Error! Pls check if you are logged in.');
-				        }
-				      });
-					    $("body").css("cursor", "auto");
-                        location.reload();
-					  });
+// toggle read property of current article
+$('#markAsRead').click(function(){
+	$("body").css("cursor", "wait");
+	$.ajax( { url: './?action=toggle_archive&id={{ entry.id|e }}' }).done(
+		function( data ) {
+			if ( data == '1' ) {
+				var anchor = $('#markAsRead')
+				if ( anchor.hasClass("archive-off") ) {
+					anchor.removeClass("archive-off");	
+					anchor.addClass("archive");
+					anchor.text(" mark unread");
+				}
+				else {
+					anchor.removeClass("archive");	
+					anchor.addClass("archive-off");
+					anchor.text(" mark read");
+				}
+			}
+			else {
+				alert('Error! Pls check if you are logged in.');
+			}
+		});
+	$("body").css("cursor", "auto");
+});
+
+// toggle favorite property of current article
+$('#setFav').click(function(){
+	$("body").css("cursor", "wait");
+	$.ajax( { url: './?action=toggle_fav&id={{ entry.id|e }}' }).done(
+		function( data ) {
+			if ( data == '1' ) {
+				var anchor = $('#setFav')
+				if ( anchor.hasClass("fav-off") ) {
+					anchor.removeClass("fav-off");	
+					anchor.addClass("fav");
+					anchor.text(" mark read");
+				}
+				else {
+					anchor.removeClass("fav");	
+					anchor.addClass("fav-off");
+					anchor.text(" mark read");
+				}
+			}
+			else {
+				alert('Error! Pls check if you are logged in.');
+			}
+		});
+	$("body").css("cursor", "auto");
+});
 
             $(window).scroll(function(e){
                 var scrollTop = $(window).scrollTop();
